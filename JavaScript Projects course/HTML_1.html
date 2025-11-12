@@ -1,0 +1,123 @@
+// Switch statement with weather conditions
+let weather = "sunny";
+let recommendation = "";
+
+switch (weather) {
+    case "sunny":
+        recommendation = "☀️ Perfect day for outdoor activities!";
+        break;
+    case "rainy":
+        recommendation = "🌧️ Don't forget your umbrella!";
+        break;
+    case "snowy":
+        recommendation = "❄️ Time for hot chocolate and warm clothes";
+        break;
+    case "cloudy":
+        recommendation = "☁️ Good day for indoor activities";
+        break;
+    case "windy":
+        recommendation = "💨 Hold onto your hat!";
+        break;
+    default:
+        recommendation = "Check the weather forecast";
+}
+
+console.log(`Weather: ${weather} - ${recommendation}`);
+
+
+// utilizing the document.getElementsByClassName() method.//
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Widget</title>
+    <style>
+        .weather-option { 
+            display: inline-block; 
+            padding: 10px 20px; 
+            margin: 5px; 
+            border: 1px solid #ccc; 
+            cursor: pointer;
+            border-radius: 20px;
+        }
+        .active-weather { 
+            background-color: #fff3e0; 
+            border-color: #ff9800;
+        }
+        .weather-display { 
+            padding: 20px; 
+            margin: 15px 0; 
+            border-radius: 10px; 
+            text-align: center;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Current Weather Conditions</h2>
+    
+    <div class="weather-option" data-weather="sunny">Sunny ☀️</div>
+    <div class="weather-option" data-weather="rainy">Rainy 🌧️</div>
+    <div class="weather-option" data-weather="snowy">Snowy ❄️</div>
+    <div class="weather-option" data-weather="cloudy">Cloudy ☁️</div>
+    <div class="weather-option" data-weather="windy">Windy 💨</div>
+    
+    <div class="weather-display" id="weather-output">
+        Select a weather condition above
+    </div>
+
+    <script>
+        const weatherOptions = document.getElementsByClassName('weather-option');
+        const weatherOutput = document.getElementById('weather-output');
+
+        for (let i = 0; i < weatherOptions.length; i++) {
+            weatherOptions[i].addEventListener('click', function() {
+                const weather = this.getAttribute('data-weather');
+                let recommendation = '';
+                let bgColor = '';
+                
+                // Switch statement for weather recommendations
+                switch (weather) {
+                    case "sunny":
+                        recommendation = "Perfect day for outdoor activities! Wear sunscreen.";
+                        bgColor = "#fff9c4";
+                        break;
+                    case "rainy":
+                        recommendation = "Don't forget your umbrella! Great day for reading indoors.";
+                        bgColor = "#bbdefb";
+                        break;
+                    case "snowy":
+                        recommendation = "Bundle up! Perfect for skiing or building a snowman.";
+                        bgColor = "#e3f2fd";
+                        break;
+                    case "cloudy":
+                        recommendation = "Mild weather. Good for walks without the harsh sun.";
+                        bgColor = "#f5f5f5";
+                        break;
+                    case "windy":
+                        recommendation = "Hold onto your hat! Great day for flying kites.";
+                        bgColor = "#d7ccc8";
+                        break;
+                    default:
+                        recommendation = "Check local weather forecast.";
+                        bgColor = "#f0f0f0";
+                }
+                
+                // Update active state
+                const allWeatherOptions = document.getElementsByClassName('weather-option');
+                for (let j = 0; j < allWeatherOptions.length; j++) {
+                    allWeatherOptions[j].classList.remove('active-weather');
+                }
+                this.classList.add('active-weather');
+                
+                // Update display
+                weatherOutput.style.backgroundColor = bgColor;
+                weatherOutput.innerHTML = `
+                    <h3>${weather.charAt(0).toUpperCase() + weather.slice(1)} Weather</h3>
+                    <p>${recommendation}</p>
+                `;
+            });
+        }
+    </script>
+</body>
+</html>
